@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+	    <title> Lab 5 </title>
+
+        <link rel="stylesheet" href="lab5style.css">
+        <script src="lab5.js"></script>
+        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script>
+            function getRandom(arr, n) {
+                var result = new Array(n),
+                    len = arr.length,
+                    taken = new Array(len);
+                if (n > len)
+                    throw new RangeError("getRandom: more elements taken than available");
+                while (n--) {
+                    var x = Math.floor(Math.random() * len);
+                    result[n] = arr[x in taken ? taken[x] : x];
+                    taken[x] = --len in taken ? taken[len] : len;
+                }
+                return result;
+            };
+            function userData(){
+                $.get( "https://api.github.com/users", function( data ) {
+                  var table = new Array();
+                  
+                  $.each(getRandom(data, 8), function(index, dev) {
+                      var id = dev.id !== undefined ? dev.id : null;
+                      var login = dev.login !==undefined ? dev.login : null;
+                      var avatar_url = dev.avatar_url !==undefined ? dev.avatar_url : null;
+                      var url = dev.url !==undefined ? dev.url : null;
+                      var location = dev.location !==undefined ? dev.location : null;
+                      var site_admin = dev.site_admin !==undefined ? dev.site_admin : null;
+
+                      table.push(
+                          `<table>
+                              <caption > Dev #${index+1} </caption>
+                              <tr>
+                                <th> Username: </td>
+                                <td id="username" onclick="moreInfo('${dev.starred_url}', '${dev.subscriptions_url}', '${dev.type}')">${login}</td>
+                                <td rowspan="4"><img src="${avatar_url}" width="200px" height="200px"/></td>
+                              </tr>
+                              <tr>
+                                <th>Homepage URL:</td>
+                                <td> ${url} </td>
+                              </tr>
+                              <tr>
+                                <th> Location: </td>
+                                <td> ${location} </td>
+                              </tr>
+                              <tr>
+                                <th> Is Admin? : </td>
+                                <td>${site_admin}</td>
+                              </tr>
+                            </table>`
+                      );
+                  });
+                  $("#results").empty().append(table);
+                });
+            };
+            userData();
+            setInterval(userData, 10000)
+        </script>
+
+    </head>
+
+    <body>
+        <div class="pagetitle"> Highlighted Github Developers </div>
+
+        <div id="searchuser">
+            <label> SEARCH FROM GIT: </label>
+            <input type="text" id="searchId" placeholder="Git Username" size="27">
+            <button id='usersearch' onclick="searchUser()"> Search </button>
+        </div>
+
+        <div id="results"></div>
+</body>

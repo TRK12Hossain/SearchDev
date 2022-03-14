@@ -1,0 +1,63 @@
+body {
+    background-image: url('background.png');
+	margin: 0;
+	padding: 0;
+    color: #0770A0;
+
+}
+.pagetitle {
+	width: 500px;
+	height: 100px;
+	/* background: lightskyblue; */
+	position: relative;
+	font-size: 30px;
+	text-align: left;
+	padding: 20px;
+	font-family: "Georgia", serif;
+	font-style: bold;
+    color: lightskyblue;
+}
+
+#searchuser {
+    padding: 20px;
+    padding-bottom: 50px;
+
+}
+label{
+    font-style: bold;
+
+}
+
+table{
+    padding-left: 20px;
+
+}
+td {
+	border: 1px solid #0770A0;
+    color: #0770A0;
+    padding: 10px;
+    padding-right: 80px;
+}
+th {
+    border: 1px solid #0770A0;
+    color: black;
+    padding: 10px;
+    padding-right: 10px;
+    text-align: left;
+    background-color: #0770A0;
+    
+}
+caption {
+    color: #0770A0;
+    text-align: left;
+    display: table-caption;
+    padding-left: 25px;
+    padding-bottom: 2px;
+    font-style: bold;
+    font-size: 20px;
+
+}
+
+.table:hover {
+    background: lightblue;
+}
